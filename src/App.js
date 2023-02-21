@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import io from 'socket.io-client';
+const socket = io.connect('https://phpstack-944849-3288229.cloudwaysapps.com/')
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export class App extends Component {
+  componentDidMount(){
+ 
+   
+    socket.emit('set-data', 'salam');
+    socket.on('get-data', (data)=>{
+      console.log(data)
+    })
+  }
+  render() {
+    return (
+      <div>App</div>
+    )
+  }
 }
 
-export default App;
+export default App
